@@ -27,6 +27,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <fcntl.h>
 #include <termios.h>
 #include <libsvm/svm.h>
+#include "kbhit.h"
 
 #define BAUDRATE B19200
 
@@ -100,20 +101,26 @@ void printAvgValsOver(FILE *f, int loops) {
 }
 
 
-void genLibSvmTrainSet(FILE *f, int label) {
+void genLibSvmTrainSet(FILE *f, int label, char* output) {
 	int y;
 	int samp[NOSAMPS];
 	char buff[10240];
 	char valstr[1024];
-	while(1) {
+	FILE *out_file;
+	out_file = fopen(output, "a+");
+
+	while(!kbhit()) {
 		getSamples(f, samp);
 		sprintf(buff, "%i", label);
 		for (y=0; y<NOSAMPS; y++) {
 			sprintf(valstr, " %i:%i", y+1, samp[y]);
 			strcat(buff, valstr);
 		}
+		fprintf(out_file,"%s\n", buff);
 		printf("%s\n", buff);
 	}
+	
+	fclose(out_file);
 }
 
 void loadRangeFile(char *rangeFile, int rmin[], int rmax[]) {
@@ -202,7 +209,7 @@ int main(int argc, char **argv) {
 	if (strcmp(argv[1], "-printavg")==0) {
 		printAvgValsOver(f, atoi(argv[2]));
 	} else if (strcmp(argv[1], "-gentrain")==0) {
-		genLibSvmTrainSet(f, atoi(argv[2]));
+		genLibSvmTrainSet(f, atoi(argv[2]), argv[3]);
 	} else if (strcmp(argv[1], "-classify")==0) {
 		classifyInput(f, argv[2]);
 	}
