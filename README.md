@@ -17,8 +17,7 @@ Exemple de aplicatii: Sesizarea persoanelor care iti ating/zgarie masina, Contro
 
 Categoria: Hardware
 
-Componenta echipa: Cherciu Claudiu, Cherciu Costel
-
+Componenta echipa: Cherciu Claudiu, Cherciu Costel 
 Link Github: https://github.com/Peterthegreat/Eppe/
 
 
