@@ -11,9 +11,9 @@ Proiectul ofera utilizatorului posibilitatea de a transforma orice suprafata con
 
 Avantajul principal al acestei implementari este ca nu este nevoie decat de generarea unui singur semnal PWM si achizitia cu un convertor ADC. Acestea pot fi chiar un singur pin fizic al microcontrollerului, iar ca electrod poate fi folosita carcasa metalica a dispozitivului.
 
-Marind performantele dispozitivului si profitand de propietatile conductoare ale corpului, se pot detecta chiar diferite gesturi si posturi ale unei persoane.
+Marind performantele dispozitivului si profitand de propietatile conductoare ale corpului, se pot detecta chiar diferite gesturi si posturi ale unei persoane, sau recunoasterea mult mai multor gesturi si interactiuni.
 
-Exemple de aplicatii: Sesizarea persoanelor care iti ating/zgarie masina, Controlul unui MP3 Player, Jocuri interactive cu mai multi participanti, Marirea paletei de gesturi recunoscute (alaturi de alte interfete capacitive: "click dreapta")
+Exemple de aplicatii: Sesizarea persoanelor care iti ating/zgarie masina, Controlul unui MP3 Player, Jocuri interactive cu mai multi participanti, Marirea paletei de gesturi recunoscute (alaturi de alte interfete capacitive: "click dreapta"), Interactivitate cu un lichid.
 
 Categoria: Hardware
 
