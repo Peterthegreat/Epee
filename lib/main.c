@@ -244,9 +244,10 @@ int main(int argc, char **argv) {
 
 			if(i< atoi(argv[2]) - 1) {
 				printf("Urmatoarea clasa in 2secunde..");
-				sleep(2);
+				sleep(3);
 			}
 		}
+
 		printf("Dau svm-easy\n");
 		printf(argv[3]);
 		printf("\n");
@@ -254,6 +255,10 @@ int main(int argc, char **argv) {
 		sprintf(cmd, "svm-easy %s", argv[3]);
 		printf("Comanda e %s",cmd);
 		system(cmd);
+
+		//run the new classification
+		classifyInput(f, argv[3]);
+
 	} else if (strcmp(argv[1], "-classify")==0) {
 			classifyInput(f, argv[2]);
 	}
