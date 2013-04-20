@@ -32,6 +32,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define BAUDRATE B19200
 
 #define NOSAMPS 32
+#define DEFAULT_SAMPLES 12
 
 int serialOpen(char *port) {
 	struct termios oldtio,newtio;
@@ -106,23 +107,31 @@ void genLibSvmTrainSet(FILE *f, int label, char* output, int samples) {
 	int samp[NOSAMPS];
 	char buff[10240];
 	char valstr[1024];
+	printf("Am ajuns in genLibSvmTrainSet(..)\n");
 	FILE *out_file;
 	out_file = fopen(output, "a+");
 	//printf("Samples ramase:%i\n", samples);
 	//printf("Condifie: \n", (samples>0));
+	printf("Am deschis deja fisierul de iesire.\n");
 	while(!kbhit() && (samples>0)) {
+		printf("Incerc citirea de pe atmega");
 		getSamples(f, samp);
+		
+		printf("Am terminat citirea de pe atmega");
 		sprintf(buff, "%i", label);
 		for (y=0; y<NOSAMPS; y++) {
 			sprintf(valstr, " %i:%i", y+1, samp[y]);
 			strcat(buff, valstr);
 		}
 		fprintf(out_file,"%s\n", buff);
+		printf("Am scris in fisier!\n");
 		printf("%s\n", buff);
 		samples--;
 	}
 
+	printf("Inchid fisierul de iesire");
 	fclose(out_file);
+	printf("Done");
 }
 
 void loadRangeFile(char *rangeFile, int rmin[], int rmax[]) {
@@ -203,19 +212,48 @@ int main(int argc, char **argv) {
 	com=serialOpen("/dev/ttyUSB0");
 	f=fdopen(com, "r");
 	fgets(buff, 1024, f); //First line usually only comes in half; kill it.
+	printf("Serialul pare ok..\n");
 
 	if (argc<3) {
-		printf("Usage: %s [-printavg samps|-gentrain label|-classify svm-model-prefix]\n", argv[0]);
+		printf("Usage: %s [-printavg samps|-gentrain label [no_samples]|-autotrain classes filename [no_samples]|-classify svm-model-prefix]\n", argv[0]);
 		return 1;
 	}
 	if (strcmp(argv[1], "-printavg")==0) {
 		printAvgValsOver(f, atoi(argv[2]));
 	} else if (strcmp(argv[1], "-gentrain")==0) {
-		if(argc==3) {
-			genLibSvmTrainSet(f, atoi(argv[2]), argv[3],12);
-		}else{
+		if(argc==4) {
+			printf("Am 3 parametrii\n");
+			genLibSvmTrainSet(f, atoi(argv[2]), argv[3],DEFAULT_SAMPLES);
+		}else if(argc==5){
+			printf("Am 4 parametrii\n");
 			genLibSvmTrainSet(f, atoi(argv[2]), argv[3],atoi(argv[4]));
+		}else{
+			printf("Error");
 		}
+	} else if (strcmp(argv[1], "-autotrain")==0) {
+		int i = 0;
+		for(i = 0; i< atoi(argv[2]); i++) {
+
+			printf("Ne antrenam pt comanda %i.\n",i);
+
+			if(argc==3){ //assume default no_sample
+				genLibSvmTrainSet(f, i, argv[3],DEFAULT_SAMPLES);
+			} else {
+				genLibSvmTrainSet(f, i, argv[3],atoi(argv[4]));
+			}
+
+			if(i< atoi(argv[2]) - 1) {
+				printf("Urmatoarea clasa in 2secunde..");
+				sleep(2);
+			}
+		}
+		printf("Dau svm-easy\n");
+		printf(argv[3]);
+		printf("\n");
+		char cmd[90];
+		sprintf(cmd, "svm-easy %s", argv[3]);
+		printf("Comanda e %s",cmd);
+		system(cmd);
 	} else if (strcmp(argv[1], "-classify")==0) {
 			classifyInput(f, argv[2]);
 	}
