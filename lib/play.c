@@ -1,8 +1,9 @@
 #include "epee.c"
 #define COMANDA_0 
-#define COMANDA_1 "mpc play"
-#define COMANDA_2 "mpc stop"
-#define COMANDA_3 "mpc next"
+#define COMANDA_1 "mpc toggle"
+#define COMANDA_2 "mpc next"
+#define COMANDA_3 "mpc volume -10"
+#define COMANDA_4 "mpc volume +10"
 
 #define DEBOUNCE_SAMPLES 2
 
@@ -97,16 +98,16 @@ int main(int argc, char **argv) {
 			//printf("Am facut debounce si am detectat clasa %f\n", class);
 
 			//actiune pt clasa:
-			switch(class){
+			switch(class) {
 				case 1: system(COMANDA_1);
-					  printf(COMANDA_1);
+					printf(COMANDA_1);
 					break;
 				case 2: system(COMANDA_2);
                                         break;
 				case 3: system(COMANDA_3);
                                         break;
-
-
+				case 4: system(COMANDA_4);
+					break;
 			 }
 		}
 
