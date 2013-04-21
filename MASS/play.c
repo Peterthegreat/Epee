@@ -1,6 +1,6 @@
 #include "epee.c"
 #define COMANDA_0 
-#define COMANDA_1 "omxplayer music/ambient.mp3"
+#define COMANDA_1 "omxplayer music/boat.mp3"
 #define COMANDA_2 "omxplayer music/rev.mp3"
 #define COMANDA_3 "omxplayer music/talere.mp3"
 #define COMANDA_4 "omxplayer music/rev.mp3"

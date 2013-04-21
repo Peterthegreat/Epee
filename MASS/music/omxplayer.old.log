@@ -45,7 +45,7 @@
 00:00:00 T:0   DEBUG: COMXCoreComponent::AllocInputBuffers component(OMX.broadcom.audio_decode) - port(120), nBufferCountMin(4), nBufferCountActual(57), nBufferSize(6144), nBufferAlignmen(16)
 00:00:00 T:0   DEBUG: COMXAudio::Initialize Ouput bps 16 samplerate 44100 channels 2 device local buffer size 352800 bytes per second 176400 passthrough 0 hwdecode 0
 00:00:00 T:0   DEBUG: COMXAudio::Initialize Input bps 16 samplerate 44100 channels 2 device local buffer size 352800 bytes per second 176400 passthrough 0 hwdecode 0
-00:00:00 T:0   DEBUG: OMXThread::Create - Thread with id -1294216096 started
+00:00:00 T:0   DEBUG: OMXThread::Create - Thread with id -1294699424 started
 00:00:00 T:0   DEBUG: pcm->nPortIndex     : 232
 00:00:00 T:0   DEBUG: pcm->eNumData       : 0
 00:00:00 T:0   DEBUG: pcm->eEndian        : 1
@@ -66,6 +66,6 @@
 00:00:00 T:0   DEBUG: pcm->nSamplingRate  : 44100
 00:00:00 T:0   DEBUG: OMX_AUDIO_ChannelLF
 00:00:00 T:0   DEBUG: OMX_AUDIO_ChannelRF
-00:00:00 T:0   DEBUG: OMXThread::Run - Exited thread with  id -1294216096
+00:00:00 T:0   DEBUG: OMXThread::Run - Exited thread with  id -1294699424
 00:00:00 T:0   DEBUG: OMXThread::StopThread - Thread stopped
 00:00:00 T:0   ERROR: COMXCoreComponent::DecoderEventHandler OMX.broadcom.audio_mixer - OMX_ErrorPortUnpopulated port 0, cannot parse input stream
