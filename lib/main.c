@@ -35,7 +35,7 @@ int main(int argc, char **argv) {
 
                         printf("Ne antrenam pt comanda %i.\n",i);
 
-                        if(argc==3){ //assume default no_sample
+                        if(argc==4){ //assume default no_sample
                                 genLibSvmTrainSet(f, i, argv[3],DEFAULT_SAMPLES);
                         } else {
                                 genLibSvmTrainSet(f, i, argv[3],atoi(argv[4]));
